@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="title desc">
+<title id="title">Black Formalwear Placeholder</title>
+<desc id="desc">A placeholder illustration for black formalwear.</desc>
+<rect width="800" height="1000" fill="#f4efe7"/>
+<rect x="48" y="48" width="704" height="904" rx="24" fill="#fff" stroke="#dfd3c3"/>
+<path d="M300 188h200l58 104-40 464H282l-40-464z" fill="#222"/>
+<path d="M350 188l50 110 50-110" fill="#f7f3ec"/>
+<path d="M360 284h80l-40 80z" fill="#8b7355"/>
+<path d="M260 320l-96 164 82 34 82-188M540 320l96 164-82 34-82-188" fill="#2c2c2c"/>
+<text x="400" y="864" fill="#1c1c1c" font-family="Arial, sans-serif" font-size="34" font-weight="700" text-anchor="middle">Morning Coat</text>
+<text x="400" y="904" fill="#8b7355" font-family="Arial, sans-serif" font-size="22" text-anchor="middle">Black Demo Placeholder</text>
+</svg>

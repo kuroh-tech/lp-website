@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-labelledby="title desc">
+<title id="title">Demo Contact Banner</title>
+<desc id="desc">A placeholder banner for legacy contact call to action areas.</desc>
+<defs>
+<linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#161616"/>
+<stop offset="100%" stop-color="#3b3328"/>
+</linearGradient>
+</defs>
+<rect width="600" height="200" fill="url(#bg)"/>
+<rect x="18" y="18" width="564" height="164" rx="14" fill="none" stroke="#8b7355" stroke-width="2"/>
+<text x="48" y="84" fill="#f6f1e8" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">CONTACT</text>
+<text x="48" y="124" fill="#ffffff" font-family="Arial, sans-serif" font-size="34" font-weight="700">Demo Inquiry Support</text>
+<text x="48" y="154" fill="#d9cdbb" font-family="Arial, sans-serif" font-size="16">Legacy asset replaced with a theme placeholder.</text>
+</svg>

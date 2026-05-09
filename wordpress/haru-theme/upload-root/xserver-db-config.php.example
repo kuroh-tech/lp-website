@@ -1,0 +1,17 @@
+<?php
+/**
+ * XServer 用の DB 設定。
+ *
+ * 1. このファイルを `xserver-db-config.php` にコピー
+ * 2. XServer の DB 情報へ書き換え
+ * 3. `_migration/import.php?token=...` で初回インポート
+ */
+
+putenv('WORDPRESS_DB_NAME=__SET_XSERVER_DB_NAME__');
+putenv('WORDPRESS_DB_USER=__SET_XSERVER_DB_USER__');
+putenv('WORDPRESS_DB_PASSWORD=__SET_XSERVER_DB_PASSWORD__');
+putenv('WORDPRESS_DB_HOST=__SET_XSERVER_DB_HOST__');
+putenv('WORDPRESS_DB_CHARSET=utf8mb4');
+putenv('WORDPRESS_DB_COLLATE=');
+putenv('WORDPRESS_TABLE_PREFIX=wp_');
+putenv('WORDPRESS_DEBUG=');

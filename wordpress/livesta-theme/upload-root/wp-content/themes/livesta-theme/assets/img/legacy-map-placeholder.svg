@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+<title id="title">Demo Access Map</title>
+<desc id="desc">A placeholder access map for legacy pages.</desc>
+<rect width="1200" height="800" fill="#f6f2eb"/>
+<g stroke="#d8cdbd" stroke-width="8">
+<path d="M0 150h1200M0 350h1200M0 550h1200"/>
+<path d="M180 0v800M420 0v800M720 0v800M980 0v800"/>
+</g>
+<path d="M620 245c0-61-49-110-110-110s-110 49-110 110c0 72 110 205 110 205s110-133 110-205z" fill="#8b7355"/>
+<circle cx="510" cy="245" r="48" fill="#fff"/>
+<rect x="700" y="220" width="320" height="176" rx="18" fill="#1c1c1c"/>
+<text x="740" y="285" fill="#d9cdbb" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">ACCESS MAP</text>
+<text x="740" y="338" fill="#ffffff" font-family="Arial, sans-serif" font-size="42" font-weight="700">Demo Location</text>
+<text x="740" y="372" fill="#d9cdbb" font-family="Arial, sans-serif" font-size="18">Legacy map image replaced with a theme placeholder.</text>
+</svg>

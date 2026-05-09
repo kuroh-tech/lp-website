@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 18" role="img" aria-labelledby="title desc">
+<title id="title">Decorative Ornament</title>
+<desc id="desc">A small decorative ornament placeholder.</desc>
+<path d="M0 9h44M76 9h44" stroke="#8b7355" stroke-width="2"/>
+<path d="M60 1l8 8-8 8-8-8z" fill="#8b7355"/>
+</svg>

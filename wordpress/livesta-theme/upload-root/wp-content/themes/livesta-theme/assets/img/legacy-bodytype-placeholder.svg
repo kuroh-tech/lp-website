@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 260" role="img" aria-labelledby="title desc">
+<title id="title">Body Type Placeholder</title>
+<desc id="desc">A neutral body type illustration placeholder.</desc>
+<rect width="172" height="260" rx="18" fill="#f4efe7"/>
+<rect x="12" y="12" width="148" height="236" rx="12" fill="#fff" stroke="#dfd3c3"/>
+<circle cx="86" cy="58" r="22" fill="#d7c7b0"/>
+<path d="M63 92c12-10 34-10 46 0l8 18c6 13 8 28 6 43l-8 59H57l-8-59c-2-15 0-30 6-43z" fill="#8b7355" opacity=".9"/>
+<path d="M57 212l-18 26M115 212l18 26M63 112l-24 40M109 112l24 40" stroke="#8b7355" stroke-width="10" stroke-linecap="round"/>
+<text x="86" y="238" fill="#7a6246" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">BODY TYPE</text>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Staff Photo Placeholder</title>
+<desc id="desc">A placeholder illustration for legacy staff photos.</desc>
+<defs>
+<linearGradient id="teamBg" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#1a1a1a"/>
+<stop offset="100%" stop-color="#403528"/>
+</linearGradient>
+</defs>
+<rect width="1200" height="900" fill="url(#teamBg)"/>
+<circle cx="360" cy="332" r="92" fill="#e2d4c0"/>
+<circle cx="600" cy="292" r="108" fill="#f0e3d2"/>
+<circle cx="840" cy="332" r="92" fill="#e2d4c0"/>
+<path d="M212 734c28-118 116-182 148-182s120 64 148 182" fill="#8b7355"/>
+<path d="M432 760c34-150 142-236 168-236s134 86 168 236" fill="#a08968"/>
+<path d="M692 734c28-118 116-182 148-182s120 64 148 182" fill="#8b7355"/>
+<text x="600" y="136" fill="#d7c9b6" font-family="Arial, sans-serif" font-size="24" letter-spacing="4" text-anchor="middle">TEAM PHOTO</text>
+<text x="600" y="186" fill="#fff" font-family="Arial, sans-serif" font-size="50" font-weight="700" text-anchor="middle">Demo Staff Placeholder</text>
+</svg>

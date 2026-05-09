@@ -1,0 +1,78 @@
+services:
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:php8.2-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8102:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('FS_METHOD', 'direct');
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+
+  setup:
+    image: wordpress:cli-php8.2
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+      wordpress:
+        condition: service_started
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('FS_METHOD', 'direct');
+    entrypoint:
+      - /bin/sh
+      - -lc
+      - |
+          set -eu
+          until [ -f /var/www/html/wp-config.php ]; do
+            sleep 3
+          done
+          until wp db check --path=/var/www/html --allow-root >/dev/null 2>&1; do
+            sleep 3
+          done
+          if ! wp core is-installed --path=/var/www/html --allow-root >/dev/null 2>&1; then
+            wp core install --path=/var/www/html --url=http://localhost:8102 --title='TPI Demo' --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email --allow-root
+          fi
+          wp theme activate tpi-theme --path=/var/www/html --allow-root
+          wp option update permalink_structure '/%postname%/' --path=/var/www/html --allow-root
+          wp rewrite flush --hard --path=/var/www/html --allow-root
+          wp eval 'if (function_exists("tpi_bootstrap_site")) { tpi_bootstrap_site(); }' --path=/var/www/html --allow-root
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+
+volumes:
+  db_data:
+  wordpress_data:
