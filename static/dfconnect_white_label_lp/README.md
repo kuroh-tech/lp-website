@@ -1,73 +1,85 @@
-# DF CONNECT ホワイトラベル制作・運用保守LP コーディングデータ
+# DF CONNECT ホワイトラベル制作・運用保守LP
 
-添付イメージをベースに、Web制作会社向けのホワイトラベル制作・運用保守パートナーLPとして静的HTML/CSS/JSで実装したデータです。
+`dfconnect_white_label_lp` は、既存LPの見た目を維持したまま、フォーム送信をXServer用PHP実装へ置き換えた構成です。
 
 ## ファイル構成
 
 ```txt
 dfconnect_white_label_lp/
-├── index.html
+├── index.php                 # 既存HTML互換でCSRF発行・フラッシュ表示
+├── index.html.bak            # 旧HTML（保守用）
 ├── css/
 │   └── style.css
 ├── js/
 │   └── main.js
 ├── assets/
 │   ├── img/
-│   │   ├── logo.svg
-│   │   ├── favicon.svg
-│   │   ├── hero-bg.svg
-│   │   ├── hero-dashboard.svg
-│   │   └── ogp.png
 │   └── icons/
-│       └── icon-*.svg
-└── reference/
-    └── design-reference.jpeg
+├── api/
+│   └── contact.php           # POST受付エンドポイント
+├── app/
+│   ├── bootstrap.php
+│   ├── form_options.php
+│   ├── helpers.php
+│   ├── Csrf.php
+│   ├── Validator.php
+│   ├── InquiryRepository.php
+│   ├── RateLimiter.php
+│   ├── MailService.php
+│   └── .htaccess
+├── config/
+│   ├── app.example.php
+│   ├── db.example.php
+│   ├── mail.example.php
+│   ├── app.php               # 本番値。Git管理対象外
+│   ├── db.php                # 本番値。Git管理対象外
+│   ├── mail.php              # 本番値。Git管理対象外
+│   └── .gitignore
+├── database/
+│   ├── schema.sql
+│   └── .htaccess
+├── storage/
+│   └── logs/
+│       └── contact_error.log
+│       └── .htaccess
+├── composer.json
+├── thanks.html
+├── privacy.html
+├── docs/
+│   └── form-requirements.md
+└── README.md
 ```
 
-## 実装内容
+## 実装済みの主な点
 
-- レスポンシブ対応済みのLP
-- ヘッダー固定、スマホ用ハンバーガーメニュー
-- ファーストビュー、課題、解決策、対応領域、利用の流れ、導入事例、セキュリティ、FAQ、資料請求、問い合わせフォーム
-- 画像・アイコンはSVG中心で同梱
-- 外部ライブラリ不使用
-- フォントファイル同梱なし（system font stack）
+- `index.php` 化とCSRFトークン発行
+- POST時のみ受ける `/api/contact.php`
+- honeypot / CSRF / レート制限（IP+メール）
+- サーバー側バリデーション
+- MySQL/MariaDB保存（`inquiries` / `inquiry_attempts`）
+- PHPMailerで管理者通知 + 自動返信
+- エラー時の入力値保持とフォーム差し戻し（303）
+- `thanks.html` / `privacy.html` 追加
+- 機密ディレクトリへの直接アクセス拒否（`.htaccess`）
 
-## 必ず差し替える箇所
+## ローカル確認
 
-1. `index.html` の電話番号 `03-1234-5678`
-2. フォーム送信先  
-   現状は静的デモのため、`js/main.js` で送信を止めてトースト表示しています。実運用時は以下いずれかに変更してください。
-   - サーバーサイドの問い合わせ処理
-   - Formspree / Google Apps Script / microCMS等のフォーム連携
-   - WordPress化する場合はContact Form 7等
-3. `og:image` のURL  
-   本番公開時は絶対URLに変更してください。
-4. 会社概要・プライバシーポリシー・特商法リンク
-5. 資料ダウンロード導線  
-   PDFなどを用意する場合は `#download` のCTAリンクをPDFまたはフォームに変更してください。
-
-## 編集しやすい箇所
-
-- 色：`css/style.css` の `:root` 内のCSS変数
-- 最大幅：`--container`
-- ヘッダー高さ：`--header-height`
-- メイン文言：`index.html` の各section
-- 画像：`assets/img/hero-dashboard.svg` や `assets/icons/` 配下
-
-## ローカル確認方法
-
-そのまま `index.html` をブラウザで開いて確認できます。ローカルサーバーで確認する場合は以下です。
-
-```bash
+```
 cd dfconnect_white_label_lp
-python3 -m http.server 8080
+php -S localhost:8080
 ```
 
-ブラウザで `http://localhost:8080` を開いてください。
+`http://localhost:8080/index.php` を開いて以下を確認します。
 
-## 補足
+- 送信ボタンで通常POST送信されること
+- エラー時に値が保持されること
+- 成功/失敗で表示内容が崩れないこと
 
-- `reference/design-reference.jpeg` は今回のイメージ画像を比較用に入れています。公開時は削除して問題ありません。
-- SVGアイコンは自由に差し替え可能です。
-- 画像はデプロイしやすいように軽量化を優先しています。
+## デプロイ時の簡易チェック
+
+1. `config/app.php`, `config/db.php`, `config/mail.php` に本番値を設置
+2. `composer install --no-dev` を実行（`vendor/`をアップロード）
+3. `database/schema.sql` を本番DBへ適用
+4. HTTPSアクセス時に `/`, `/thanks.html`, `/privacy.html` が見えること
+5. `app/`, `config/`, `storage/`, `database/` が直接参照不可であること
+6. 正常送信・必須未入力・CSRF不正・honeypot・レート制限で期待挙動を確認

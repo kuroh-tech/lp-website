@@ -1,0 +1,17 @@
+Options -Indexes
+DirectoryIndex index.php index.html
+
+RewriteEngine On
+RewriteCond %{HTTPS} !on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteRule ^(?:app|config|database|storage|vendor)(/.*)?$ - [F,L]
+
+<FilesMatch "\.(env|ini|log|sql|md|bak|dist)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

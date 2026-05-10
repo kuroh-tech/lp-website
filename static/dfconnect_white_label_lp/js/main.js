@@ -3,8 +3,8 @@
   const header = document.querySelector('[data-header]');
   const menuButton = document.querySelector('.js-menu-button');
   const navLinks = document.querySelectorAll('.site-nav a, .header-actions a');
-  const toast = document.querySelector('.js-toast');
   const contactForm = document.querySelector('.js-contact-form');
+  const contactSubmitButton = contactForm?.querySelector('button[type="submit"]');
 
   const closeMenu = () => {
     body.classList.remove('nav-open');
@@ -49,21 +49,10 @@
     revealTargets.forEach((target) => target.classList.add('is-visible'));
   }
 
-  // Static form demo. Replace this block when connecting a real endpoint.
-  const showToast = (message) => {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add('is-show');
-    window.clearTimeout(showToast.timer);
-    showToast.timer = window.setTimeout(() => {
-      toast.classList.remove('is-show');
-    }, 4200);
-  };
-
-  contactForm?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const formData = new FormData(contactForm);
-    const company = formData.get('company') || '貴社';
-    showToast(`${company}のご相談内容を受け付けるデモです。実運用時はフォーム送信先を設定してください。`);
-  });
+  if (contactSubmitButton) {
+    contactForm?.addEventListener('submit', () => {
+      contactSubmitButton.disabled = true;
+      contactSubmitButton.textContent = '送信中...';
+    });
+  }
 })();

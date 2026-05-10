@@ -1,0 +1,7 @@
+{
+  "name": "dfconnect/lp-contact",
+  "description": "DF CONNECT LP contact form backend",
+  "require": {
+    "phpmailer/phpmailer": "^6.9"
+  }
+}
