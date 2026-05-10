@@ -42,9 +42,7 @@ final class Validator
         }
 
         $message = normalize_text($input['message'] ?? '');
-        if ($message === '') {
-            $fieldErrors['message'] = 'メッセージを入力してください。';
-        } elseif (mb_strlen($message, 'UTF-8') > 5000) {
+        if ($message !== '' && mb_strlen($message, 'UTF-8') > 5000) {
             $fieldErrors['message'] = 'メッセージは5000文字以内で入力してください。';
         }
 

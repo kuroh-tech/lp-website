@@ -23,7 +23,7 @@
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1180) closeMenu();
+    if (window.innerWidth > 960) closeMenu();
   });
 
   const updateHeader = () => {

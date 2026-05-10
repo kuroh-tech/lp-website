@@ -70,7 +70,7 @@ function redirect_with_error(array $errors, array $fieldErrors, array $payload, 
         'privacy' => $payload['privacy'],
     ]);
 
-    redirect_to('/#contact-form', 303);
+    redirect_to('../index.php#contact-form', 303);
 }
 
 function label_from_option(string $field, string $value, array $options): string
@@ -95,7 +95,7 @@ if ($honeypot !== '') {
         ]);
     }
 
-    redirect_to('/thanks.html', 303);
+    redirect_to('../thanks.html', 303);
 }
 
 try {
@@ -212,7 +212,7 @@ try {
         $repo->updateMailStatuses($inquiryId, 'sent', $autoReplyStatus);
         $repo->logAttempt($ipAddress, $mailData['email'], 'success');
         Csrf::clear();
-        redirect_to('/thanks.html', 303);
+        redirect_to('../thanks.html', 303);
     } catch (Throwable $e) {
         $repo->updateMailStatuses($inquiryId, 'failed', 'skipped');
         $repo->logAttempt($ipAddress, $mailData['email'], 'admin_mail_failed');
