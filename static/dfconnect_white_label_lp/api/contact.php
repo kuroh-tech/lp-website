@@ -70,7 +70,7 @@ function redirect_with_error(array $errors, array $fieldErrors, array $payload, 
         'privacy' => $payload['privacy'],
     ]);
 
-    redirect_to('../index.php#contact-form', 303);
+    redirect_to('../index.php#contact', 303);
 }
 
 function label_from_option(string $field, string $value, array $options): string
