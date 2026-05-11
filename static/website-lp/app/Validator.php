@@ -1,0 +1,85 @@
+<?php
+
+declare(strict_types=1);
+
+final class Validator
+{
+    public static function validate(array $input, array $options): array
+    {
+        $fieldErrors = [];
+        $errors = [];
+
+        $company = normalize_text($input['company'] ?? '');
+        if ($company === '') {
+            $fieldErrors['company'] = '会社名を入力してください。';
+        } elseif (mb_strlen($company, 'UTF-8') > 255) {
+            $fieldErrors['company'] = '会社名は255文字以内で入力してください。';
+        }
+
+        $name = normalize_text($input['name'] ?? '');
+        if ($name === '') {
+            $fieldErrors['name'] = 'お名前を入力してください。';
+        } elseif (mb_strlen($name, 'UTF-8') > 100) {
+            $fieldErrors['name'] = 'お名前は100文字以内で入力してください。';
+        }
+
+        $email = normalize_text($input['email'] ?? '');
+        if ($email === '') {
+            $fieldErrors['email'] = 'メールアドレスを入力してください。';
+        } elseif (preg_match('/[\r\n]/', $email) === 1) {
+            $fieldErrors['email'] = 'メールアドレスの形式が不正です。';
+        } elseif (mb_strlen($email, 'UTF-8') > 255) {
+            $fieldErrors['email'] = 'メールアドレスは255文字以内で入力してください。';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $fieldErrors['email'] = 'メールアドレスの形式が不正です。';
+        }
+
+        $inquiryType = normalize_text($input['inquiry_type'] ?? '');
+        if ($inquiryType === '') {
+            $fieldErrors['inquiry_type'] = '相談内容を選択してください。';
+        } elseif (!self::isValidOptionValue('inquiry_type', $inquiryType, $options)) {
+            $fieldErrors['inquiry_type'] = '相談内容の選択値が不正です。';
+        }
+
+        $message = normalize_text($input['message'] ?? '');
+        if (mb_strlen($message, 'UTF-8') > 5000) {
+            $fieldErrors['message'] = 'メッセージは5000文字以内で入力してください。';
+        }
+
+        $privacy = (string) ($input['privacy'] ?? '');
+        if ($privacy !== '1') {
+            $fieldErrors['privacy'] = 'プライバシーポリシーに同意してください。';
+        }
+
+        foreach ($fieldErrors as $message) {
+            $errors[] = $message;
+        }
+
+        $data = [
+            'company' => $company,
+            'name' => $name,
+            'email' => $email,
+            'company_type' => normalize_text($input['company_type'] ?? ''),
+            'inquiry_type' => $inquiryType,
+            'response_style' => normalize_text($input['response_style'] ?? ''),
+            'desired_timing' => normalize_text($input['desired_timing'] ?? ''),
+            'budget_range' => normalize_text($input['budget_range'] ?? ''),
+            'nda' => normalize_text($input['nda'] ?? ''),
+            'contact_method' => normalize_text($input['contact_method'] ?? ''),
+            'message' => $message,
+            'privacy' => $privacy,
+        ];
+
+        return [
+            'valid' => empty($fieldErrors),
+            'data' => $data,
+            'errors' => $errors,
+            'field_errors' => $fieldErrors,
+        ];
+    }
+
+    private static function isValidOptionValue(string $field, string $value, array $options): bool
+    {
+        return isset($options[$field]) && is_array($options[$field]) && array_key_exists($value, $options[$field]);
+    }
+}

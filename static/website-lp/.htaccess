@@ -1,0 +1,23 @@
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# POST only route: send form posts to this file into backend endpoint.
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^thanks\.html$ api/contact.php [L]
+
+# Deny direct access to backend internals.
+RewriteRule ^(?:app|config|database|storage|vendor)(/.*)?$ - [F,L]
+</IfModule>
+
+<FilesMatch "\.(env|ini|log|sql|md|bak|dist)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
