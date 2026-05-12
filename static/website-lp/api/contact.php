@@ -67,14 +67,46 @@ function redirect_system_error(array $payload): void
     redirect_to('../index.html#contact', 303);
 }
 
+function create_contact_pdo(): PDO
+{
+    $pdo = new PDO(
+        (string) config('db.dsn'),
+        (string) config('db.username'),
+        (string) config('db.password'),
+        (array) config('db.options', []),
+    );
+
+    initialize_contact_database($pdo);
+
+    return $pdo;
+}
+
+function initialize_contact_database(PDO $pdo): void
+{
+    if (!config('db.auto_migrate', false)) {
+        return;
+    }
+
+    $driver = (string) $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    $schemaFile = $driver === 'sqlite'
+        ? __DIR__ . '/../database/schema.sqlite.sql'
+        : __DIR__ . '/../database/schema.sql';
+
+    if (!is_readable($schemaFile)) {
+        throw new RuntimeException('Database schema file is not readable.');
+    }
+
+    $schema = file_get_contents($schemaFile);
+    if ($schema === false || trim($schema) === '') {
+        throw new RuntimeException('Database schema file is empty.');
+    }
+
+    $pdo->exec($schema);
+}
+
 if ($honeypot !== '') {
     try {
-        $pdo = new PDO(
-            (string) config('db.dsn'),
-            (string) config('db.username'),
-            (string) config('db.password'),
-            (array) config('db.options', []),
-        );
+        $pdo = create_contact_pdo();
         $repo = new InquiryRepository($pdo);
         $repo->logAttempt($ipAddress, null, 'honeypot');
     } catch (Throwable $e) {
@@ -88,12 +120,7 @@ if ($honeypot !== '') {
 }
 
 try {
-    $pdo = new PDO(
-        (string) config('db.dsn'),
-        (string) config('db.username'),
-        (string) config('db.password'),
-        (array) config('db.options', []),
-    );
+    $pdo = create_contact_pdo();
 } catch (Throwable $e) {
     redirect_system_error([
         'email' => $payload['email'],

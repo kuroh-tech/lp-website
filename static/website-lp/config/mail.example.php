@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'transport' => 'smtp',
     'host' => '<xserver-smtp-host>',
     'port' => 465,
     'encryption' => 'ssl',

@@ -21,7 +21,7 @@ final class MailService
         $from = (string) config('app.from_email', 'no-reply@example.com');
         $fromName = (string) config('app.from_name', 'DF CONNECT');
 
-        if (class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+        if ($this->shouldUseSmtp()) {
             $mailer = $this->createMailer();
             $mailer->setFrom($from, $fromName);
             $mailer->addAddress($to, $toName);
@@ -53,7 +53,7 @@ final class MailService
         $from = (string) config('app.from_email', 'no-reply@example.com');
         $fromName = (string) config('app.from_name', 'DF CONNECT');
 
-        if (class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+        if ($this->shouldUseSmtp()) {
             $mailer = $this->createMailer();
             $mailer->setFrom($from, $fromName);
             $mailer->addAddress($to, $toName);
@@ -73,6 +73,22 @@ final class MailService
         if (!$ok) {
             throw new RuntimeException('PHP mail() failed');
         }
+    }
+
+    private function shouldUseSmtp(): bool
+    {
+        if (!class_exists('PHPMailer\\PHPMailer\\PHPMailer')) {
+            return false;
+        }
+
+        $transport = strtolower((string) config('mail.transport', 'smtp'));
+        if ($transport === 'mail') {
+            return false;
+        }
+
+        $host = trim((string) config('mail.host', ''));
+
+        return $host !== '' && strpos($host, '<') === false;
     }
 
     private function createMailer(): \PHPMailer\PHPMailer\PHPMailer

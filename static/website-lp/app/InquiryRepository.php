@@ -63,10 +63,10 @@ final class InquiryRepository
     {
         $query = 'UPDATE inquiries SET admin_mail_status = :admin_mail_status, auto_reply_status = :auto_reply_status';
         if ($adminStatus === 'sent') {
-            $query .= ', admin_mail_sent_at = NOW()';
+            $query .= ', admin_mail_sent_at = CURRENT_TIMESTAMP';
         }
         if ($autoStatus === 'sent') {
-            $query .= ', auto_reply_sent_at = NOW()';
+            $query .= ', auto_reply_sent_at = CURRENT_TIMESTAMP';
         }
 
         $query .= ' WHERE id = :id';
