@@ -46,7 +46,7 @@ $ipAddress = client_ip();
 $userAgent = normalize_text($_SERVER['HTTP_USER_AGENT'] ?? '');
 $referrer = normalize_text($_SERVER['HTTP_REFERER'] ?? '');
 
-function redirect_form_error(array $payload): never
+function redirect_form_error(array $payload): void
 {
     log_error('form_validation_failed', [
         'email' => masked_email($payload['email'] ?? null),
@@ -57,7 +57,7 @@ function redirect_form_error(array $payload): never
     redirect_to('../index.html#contact', 303);
 }
 
-function redirect_system_error(array $payload): never
+function redirect_system_error(array $payload): void
 {
     log_error('contact_system_error', [
         'email' => masked_email($payload['email'] ?? null),

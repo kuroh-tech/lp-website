@@ -45,7 +45,7 @@ function flash_get(string $key, mixed $default = null): mixed
     return $value;
 }
 
-function redirect_to(string $path, int $statusCode = 303): never
+function redirect_to(string $path, int $statusCode = 303): void
 {
     header("Location: {$path}", true, $statusCode);
     exit;

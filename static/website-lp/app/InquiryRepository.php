@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class InquiryRepository
 {
-    public function __construct(private readonly PDO $pdo)
+    public function __construct(private PDO $pdo)
     {
     }
 
