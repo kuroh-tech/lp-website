@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 final class RateLimiter
 {
-    public function __construct(
-        private readonly InquiryRepository $repository,
-        private readonly int $windowSeconds,
-        private readonly int $maxAttempts,
-    ) {
+    private InquiryRepository $repository;
+    private int $windowSeconds;
+    private int $maxAttempts;
+
+    public function __construct(InquiryRepository $repository, int $windowSeconds, int $maxAttempts)
+    {
+        $this->repository = $repository;
+        $this->windowSeconds = $windowSeconds;
+        $this->maxAttempts = $maxAttempts;
     }
 
     public function isLimited(string $ipAddress, string $email): bool

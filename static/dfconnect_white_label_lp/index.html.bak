@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ホワイトラベル制作・運用保守代行｜Web制作会社向け外部パートナー｜DF CONNECT</title>
-  <meta name="description" content="DF CONNECTは、Web制作会社・広告代理店向けのホワイトラベル制作・運用保守パートナーです。NDA対応、貴社名義での納品、必要時のMTG同席、制作から公開後の更新・保守まで一貫対応。実績非公開案件にも配慮し、品質確認用デモサイトと匿名対応実績をご用意しています。">
-  <meta property="og:title" content="DF CONNECT｜ホワイトラベル制作・運用保守パートナー">
+  <title>ホワイトラベル制作・運用保守代行｜Web制作会社向け外部パートナー｜DFConnect</title>
+  <meta name="description" content="DFConnectは、Web制作会社・広告代理店向けのホワイトラベル制作・運用保守パートナーです。NDA対応、貴社名義での納品、必要時のMTG同席、制作から公開後の更新・保守まで一貫対応。実績非公開案件にも配慮し、品質確認用デモサイトと匿名対応実績をご用意しています。">
+  <meta property="og:title" content="DFConnect｜ホワイトラベル制作・運用保守パートナー">
   <meta property="og:description" content="NDA対応・貴社名義で納品・必要時のMTG同席可。制作から運用保守まで、Web制作会社の外部パートナーとして支援します。">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/img/ogp.png">
@@ -18,8 +18,8 @@
 
   <header class="site-header" data-header>
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="DF CONNECT トップへ">
-        <img src="assets/img/logo.svg" alt="DF CONNECT" width="260" height="48">
+      <a class="brand" href="#top" aria-label="DFConnect トップへ">
+        <img src="assets/img/logo.svg" alt="DFConnect" width="260" height="48">
       </a>
       <button class="menu-button js-menu-button" type="button" aria-controls="site-nav" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -49,7 +49,7 @@
           <p class="hero-subtitle">Web制作会社のための<br class="sp-only">ホワイトラベル制作・運用保守パートナー</p>
           <p class="hero-lead">Web制作会社様・広告代理店様の外部パートナーとして、デザイン支給後の実装、WordPress改修、LP・下層ページ制作、公開後の更新・保守まで対応します。<br class="pc-only">NDA締結・情報管理・貴社名義での納品に対応し、必要に応じて打ち合わせ同席や要件整理補助も行いながら、貴社の制作体制を支えます。</p>
 
-          <div class="hero-badges" aria-label="DF CONNECTの特徴">
+          <div class="hero-badges" aria-label="DFConnectの特徴">
             <div class="hero-badge">
               <span>NDA締結</span>
               <small>案件開始前の守秘対応</small>
@@ -113,7 +113,7 @@
         <div class="section-heading reveal">
           <span class="section-kicker">White Label Policy</span>
           <h2 id="wl-policy-title">公開実績より、守秘と再現性を重視しています</h2>
-          <p>DF CONNECTでは、Web制作会社様・広告代理店様の外部パートナーとして、発注元企業様のブランドと案件情報を守ることを重視しています。公開ページではクライアント名やURLを大きく掲載するのではなく、デモサイト・匿名対応実績・対応範囲を通じて、制作品質と進行イメージをご確認いただける形にしています。</p>
+          <p>DFConnectでは、Web制作会社様・広告代理店様の外部パートナーとして、発注元企業様のブランドと案件情報を守ることを重視しています。公開ページではクライアント名やURLを大きく掲載するのではなく、デモサイト・匿名対応実績・対応範囲を通じて、制作品質と進行イメージをご確認いただける形にしています。</p>
         </div>
 
         <div class="wl-message reveal">
@@ -790,7 +790,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <img src="assets/img/logo.svg" alt="DF CONNECT" width="220" height="41">
+        <img src="assets/img/logo.svg" alt="DFConnect" width="220" height="41">
         <p>Web制作会社・広告代理店の外部パートナーとして、制作・改修・運用保守を支援します。NDA対応、貴社名義での納品、必要時のMTG同席まで、貴社の制作体制に合わせて柔軟に対応します。</p>
       </div>
       <div>
@@ -830,7 +830,7 @@
         <a class="button button-outline button-small" href="#contact">お問い合わせフォーム</a>
       </div>
     </div>
-    <p class="copyright">&copy; DF CONNECT All Rights Reserved.</p>
+    <p class="copyright">&copy; DFConnect All Rights Reserved.</p>
   </footer>
 
   <div class="toast js-toast" role="status" aria-live="polite">送信デモです。実運用時はフォーム送信先を設定してください。</div>

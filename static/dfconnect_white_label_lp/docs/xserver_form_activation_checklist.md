@@ -1,4 +1,4 @@
-# DF CONNECT LP 問い合わせフォーム（XServer反映）チェックリスト
+# DFConnect LP 問い合わせフォーム（XServer反映）チェックリスト
 
 作成日: 2026-05-11
 対象LP: `static/dfconnect_white_label_lp`

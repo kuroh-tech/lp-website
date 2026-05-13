@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('LIVESTA_THEME_VERSION', '1.0.2');
+define('LIVESTA_THEME_VERSION', '1.0.5');
 
 function livesta_setup_theme(): void {
     add_theme_support('title-tag');
@@ -151,13 +151,50 @@ function livesta_create_initial_terms(): void {
 }
 add_action('after_switch_theme', 'livesta_create_initial_terms');
 
+function livesta_get_news_category_ids(): array {
+    $category_ids = [];
+
+    foreach (['news', 'property', 'media'] as $slug) {
+        $term = get_category_by_slug($slug);
+
+        if ($term instanceof WP_Term) {
+            $category_ids[] = (int) $term->term_id;
+        }
+    }
+
+    return array_values(array_unique(array_filter($category_ids)));
+}
+
+function livesta_get_news_query_args(int $posts_per_page = 10, array $overrides = []): array {
+    $args = [
+        'post_type'           => 'post',
+        'post_status'         => 'publish',
+        'posts_per_page'      => $posts_per_page,
+        'ignore_sticky_posts' => true,
+    ];
+
+    $category_ids = livesta_get_news_category_ids();
+    if (!empty($category_ids)) {
+        $args['category__in'] = $category_ids;
+    }
+
+    return array_merge($args, $overrides);
+}
+
 function livesta_limit_news_queries(WP_Query $query): void {
     if (is_admin() || !$query->is_main_query()) {
         return;
     }
 
     if ($query->is_home()) {
-        $query->set('category_name', 'news,property,media');
+        $query->set('post_type', 'post');
+        $query->set('post_status', 'publish');
+        $query->set('ignore_sticky_posts', true);
+
+        $category_ids = livesta_get_news_category_ids();
+        if (!empty($category_ids)) {
+            $query->set('category__in', $category_ids);
+        }
     }
 }
 add_action('pre_get_posts', 'livesta_limit_news_queries');

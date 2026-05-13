@@ -10,6 +10,6 @@ return [
     'password' => '<xserver-smtp-password>',
     'smtp_auth' => true,
     'charset' => 'UTF-8',
-    'admin_subject' => '【DF CONNECT】お問い合わせがありました',
-    'auto_reply_subject' => '【DF CONNECT】お問い合わせありがとうございます',
+    'admin_subject' => '【DFConnect】お問い合わせがありました',
+    'auto_reply_subject' => '【DFConnect】お問い合わせありがとうございます',
 ];

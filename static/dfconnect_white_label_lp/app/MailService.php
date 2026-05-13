@@ -9,15 +9,17 @@ final class MailService
 
     public function __construct()
     {
-        $this->adminSubject = (string) config('mail.admin_subject', '【DF CONNECT】お問い合わせがありました');
-        $this->autoReplySubject = (string) config('mail.auto_reply_subject', '【DF CONNECT】お問い合わせありがとうございます');
+        $this->adminSubject = (string) config('mail.admin_subject', '【DFConnect】お問い合わせがありました');
+        $this->autoReplySubject = (string) config('mail.auto_reply_subject', '【DFConnect】お問い合わせありがとうございます');
     }
 
     public function sendAdminNotification(array $inquiry): void
     {
         $mailer = $this->createMailer();
-        $mailer->setFrom(config('app.from_email', 'no-reply@dfconnect.jp'), config('app.from_name', 'DF CONNECT'));
-        $mailer->addAddress(config('app.admin_email', 'your-admin@example.com'), config('app.admin_name', 'DF CONNECT'));
+        $fromEmail = (string) config('app.from_email', 'no-reply@dfconnect.jp');
+        $mailer->setFrom($fromEmail, (string) config('app.from_name', 'DFConnect'));
+        $mailer->Sender = $fromEmail;
+        $mailer->addAddress(config('app.admin_email', 'your-admin@example.com'), config('app.admin_name', 'DFConnect'));
         $mailer->addReplyTo($inquiry['email'], $inquiry['name']);
         $mailer->isHTML(false);
         $mailer->Subject = $this->adminSubject;
@@ -28,7 +30,9 @@ final class MailService
     public function sendAutoReply(array $inquiry): void
     {
         $mailer = $this->createMailer();
-        $mailer->setFrom(config('app.from_email', 'no-reply@dfconnect.jp'), config('app.from_name', 'DF CONNECT'));
+        $fromEmail = (string) config('app.from_email', 'no-reply@dfconnect.jp');
+        $mailer->setFrom($fromEmail, (string) config('app.from_name', 'DFConnect'));
+        $mailer->Sender = $fromEmail;
         $mailer->addAddress($inquiry['email'], $inquiry['name']);
         $mailer->isHTML(false);
         $mailer->Subject = $this->autoReplySubject;
@@ -43,15 +47,24 @@ final class MailService
         }
 
         $mailer = new \PHPMailer\PHPMailer\PHPMailer(true);
+        $mailer->CharSet = (string) config('mail.charset', 'UTF-8');
+        $mailer->Encoding = 'base64';
+
+        $host = trim((string) config('mail.host', ''));
+
+        if ($host === '') {
+            $mailer->isMail();
+
+            return $mailer;
+        }
+
         $mailer->isSMTP();
         $mailer->SMTPAuth = (bool) config('mail.smtp_auth', true);
-        $mailer->Host = (string) config('mail.host', '');
+        $mailer->Host = $host;
         $mailer->Port = (int) config('mail.port', 465);
         $mailer->Username = (string) config('mail.username', '');
         $mailer->Password = (string) config('mail.password', '');
         $mailer->SMTPSecure = (string) config('mail.encryption', 'ssl');
-        $mailer->CharSet = (string) config('mail.charset', 'UTF-8');
-        $mailer->Encoding = 'base64';
 
         return $mailer;
     }
@@ -59,7 +72,7 @@ final class MailService
     private function buildAdminBody(array $inquiry): string
     {
         return <<<TEXT
-DF CONNECTのフォームからお問い合わせがありました。
+DFConnectのフォームからお問い合わせがありました。
 
 問い合わせID：{$inquiry['public_id']}
 送信日時：{$inquiry['created_at']}
@@ -95,7 +108,7 @@ TEXT;
         return <<<TEXT
 {$inquiry['name']} 様
 
-この度はDF CONNECTへお問い合わせいただきありがとうございます。
+この度はDFConnectへお問い合わせいただきありがとうございます。
 内容を確認のうえ、通常1〜2営業日以内にご返信いたします。
 
 なお、クライアント名・案件詳細などの機密情報は、NDA締結後の共有でも問題ありません。
@@ -110,7 +123,7 @@ TEXT;
 {$inquiry['message']}
 --------------------
 
-DF CONNECT
+DFConnect
 TEXT;
     }
 }

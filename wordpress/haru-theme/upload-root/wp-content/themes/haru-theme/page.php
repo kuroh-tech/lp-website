@@ -255,6 +255,15 @@ get_header();
 
                 <?php haru_render_common_cta(); ?>
 
+            <?php elseif ($slug === 'news') : ?>
+                <?php $news_query = haru_get_news_list_query(); ?>
+                <?php haru_render_page_hero('News', 'お知らせ', '', true); ?>
+                <section>
+                    <?php haru_render_news_filters(); ?>
+                    <?php haru_render_news_listing($news_query); ?>
+                </section>
+                <?php haru_render_common_cta(); ?>
+
             <?php elseif ($slug === 'contact') : ?>
                 <?php haru_render_page_hero('Contact', 'お問い合わせ', 'ご質問・取材依頼などお気軽にどうぞ', true); ?>
                 <section>

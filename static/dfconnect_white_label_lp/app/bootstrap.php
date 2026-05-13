@@ -27,9 +27,9 @@ $defaultAppConfig = [
     'debug' => false,
     'base_url' => 'https://dfconnect.jp',
     'admin_email' => 'your-admin@example.com',
-    'admin_name' => 'DF CONNECT',
+    'admin_name' => 'DFConnect',
     'from_email' => 'no-reply@dfconnect.jp',
-    'from_name' => 'DF CONNECT',
+    'from_name' => 'DFConnect',
     'reply_to_name_suffix' => '様',
     'timezone' => 'Asia/Tokyo',
     'rate_limit_window_seconds' => 300,
@@ -58,8 +58,8 @@ $defaultMailConfig = [
     'password' => '<xserver-smtp-password>',
     'smtp_auth' => true,
     'charset' => 'UTF-8',
-    'admin_subject' => '【DF CONNECT】お問い合わせがありました',
-    'auto_reply_subject' => '【DF CONNECT】お問い合わせありがとうございます',
+    'admin_subject' => '【DFConnect】お問い合わせがありました',
+    'auto_reply_subject' => '【DFConnect】お問い合わせありがとうございます',
 ];
 
 $appConfig = array_replace_recursive($defaultAppConfig, load_config_file($configDir . '/app.php', $configDir . '/app.example.php'));

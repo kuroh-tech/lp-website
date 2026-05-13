@@ -11,6 +11,19 @@ $property_cat_url = $property_cat ? get_category_link($property_cat) : home_url(
 $media_cat_url = $media_cat ? get_category_link($media_cat) : home_url('/category/media/');
 
 $current_slug = is_category() ? (string) get_queried_object()->slug : 'all';
+$paged = max(1, (int) get_query_var('paged'), (int) get_query_var('page'));
+$news_loop_query = $GLOBALS['wp_query'];
+$custom_news_query = null;
+
+if (!is_home() && !is_category()) {
+    $custom_news_query = new WP_Query(
+        livesta_get_news_query_args(
+            max(1, (int) get_option('posts_per_page', 10)),
+            ['paged' => $paged]
+        )
+    );
+    $news_loop_query = $custom_news_query;
+}
 ?>
 <main id="content">
     <?php livesta_render_page_hero([
@@ -35,8 +48,8 @@ $current_slug = is_category() ? (string) get_queried_object()->slug : 'all';
     <section class="content-section news-list-section">
         <div class="section-inner narrow">
             <div class="news-list">
-                <?php if (have_posts()) : ?>
-                    <?php while (have_posts()) : the_post(); ?>
+                <?php if ($news_loop_query->have_posts()) : ?>
+                    <?php while ($news_loop_query->have_posts()) : $news_loop_query->the_post(); ?>
                         <a href="<?php the_permalink(); ?>" class="news-item">
                             <span class="news-date"><?php echo esc_html(get_the_date('Y.m.d')); ?></span>
                             <span class="news-cat"><?php echo esc_html(livesta_get_primary_category_name(get_the_ID())); ?></span>
@@ -66,12 +79,14 @@ $current_slug = is_category() ? (string) get_queried_object()->slug : 'all';
                 <?php endif; ?>
             </div>
 
-            <?php if ($GLOBALS['wp_query']->max_num_pages > 1) : ?>
+            <?php if ((int) $news_loop_query->max_num_pages > 1) : ?>
                 <div class="pagination-wrap">
                     <?php
                     echo wp_kses_post(
                         paginate_links(
                             [
+                                'total'     => (int) $news_loop_query->max_num_pages,
+                                'current'   => $paged,
                                 'type'      => 'list',
                                 'prev_text' => '‹',
                                 'next_text' => '›',
@@ -85,4 +100,8 @@ $current_slug = is_category() ? (string) get_queried_object()->slug : 'all';
     </section>
 </main>
 <?php
+if ($custom_news_query instanceof WP_Query) {
+    wp_reset_postdata();
+}
+
 get_footer();

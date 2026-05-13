@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('HARU_THEME_VERSION', '1.1.1');
+define('HARU_THEME_VERSION', '1.1.3');
 
 function haru_setup_theme(): void
 {

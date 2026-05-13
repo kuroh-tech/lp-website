@@ -81,8 +81,8 @@ final class Validator
             $fieldErrors['contact_method'] = '希望の連絡方法の選択値が不正です。';
         }
 
-        foreach ($fieldErrors as $message) {
-            $errors[] = $message;
+        foreach ($fieldErrors as $fieldErrorMessage) {
+            $errors[] = $fieldErrorMessage;
         }
 
         $data = [

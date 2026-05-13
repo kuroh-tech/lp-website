@@ -1,4 +1,4 @@
-# DF CONNECT ホワイトラベル制作・運用保守LP
+# DFConnect ホワイトラベル制作・運用保守LP
 
 `dfconnect_white_label_lp` は、既存LPの見た目を維持したまま、フォーム送信をXServer用PHP実装へ置き換えた構成です。
 

@@ -17,13 +17,13 @@ if (!is_array($old)) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Web制作会社・広告代理店向けの外部制作パートナー｜DF CONNECT</title>
-  <meta name="description" content="DF CONNECTは、個人事業として運営しているWeb制作会社様向けの外部制作パートナーです。デザイン支給後のコーディング、WordPress改修、公開前チェック、公開後修正まで、必要な範囲だけ対応します。">
-  <meta property="og:title" content="Web制作会社・広告代理店向けの外部制作パートナー｜DF CONNECT">
+  <title>Web制作会社・広告代理店向けの外部制作パートナー｜DFConnect</title>
+  <meta name="description" content="DFConnectは、個人事業として運営しているWeb制作会社様向けの外部制作パートナーです。デザイン支給後のコーディング、WordPress改修、公開前チェック、公開後修正まで、必要な範囲だけ対応します。">
+  <meta property="og:title" content="Web制作会社・広告代理店向けの外部制作パートナー｜DFConnect">
   <meta property="og:description" content="案件概要だけで相談可能。NDA前はクライアント名・URLを伏せてOK。匿名の協力実績と品質確認用デモサイトを掲載。">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/ogp.png">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <meta property="og:image" content="assets/images/顔写真.jpg">
+  <link rel="icon" href="assets/icons/icon-wl.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -31,8 +31,8 @@ if (!is_array($old)) {
 
   <header class="site-header" data-header>
     <div class="container header-inner">
-      <a class="brand" href="#top" aria-label="DF CONNECT トップへ">
-        <span class="brand-main">DF CONNECT</span>
+      <a class="brand" href="#top" aria-label="DFConnect トップへ">
+        <span class="brand-main">DFConnect</span>
         <span class="brand-sub">個人事業の制作パートナー</span>
       </a>
       <div class="header-actions">
@@ -58,16 +58,23 @@ if (!is_array($old)) {
       <div class="container hero-grid">
         <div class="hero-copy reveal">
           <p class="hero-kicker">Web制作会社・広告代理店向け</p>
-          <h1>制作会社の手が足りない時に、<br>実装・改修だけ相談できる外部パートナー。</h1>
+          <h1>制作会社・広告代理店様の<br>外部制作パートナーとして、<br>必要な範囲を確実に。</h1>
+          <div class="hero-person">
+            <img src="assets/images/顔写真.jpg" alt="DFConnect 代表 佐藤 優羽" class="hero-person-photo" width="72" height="72" loading="eager">
+            <div class="hero-person-text">
+              <p class="hero-person-name">佐藤 優羽 <span>／ DFConnect 代表</span></p>
+              <p class="hero-person-msg">ご相談窓口から実装・納品まで代表が一貫対応。貴社の進行ルールに沿って、確実にお引き受けいたします。</p>
+            </div>
+          </div>
           <p class="hero-lead">
-            DF CONNECTは、個人事業として運営しているWeb制作パートナーです。
-            Figma支給からのHTML/CSSコーディングを中心に、WordPress改修、公開前チェック、公開後の軽微修正まで、制作会社様の進行ルールに合わせて必要な範囲だけ対応します。
+            Figma等からのHTML/CSSコーディング、WordPress構築・改修、公開前チェック、公開後の修正対応まで。
+            貴社の制作フローに合わせ、必要な工程のみを外部化いただける体制を整えています。
           </p>
           <p class="hero-lead">
-            NDA前は、クライアント名・URL・詳細情報を伏せた概要だけで問題ありません。
-            対応可否と進め方を整理して返信します。
+            NDA締結前は、クライアント名・URL・機密情報を伏せた概要のみで結構です。
+            対応可否・確認事項・進め方を整理してご返信いたします。
           </p>
-          <div class="hero-chips" aria-label="DF CONNECTの特徴">
+          <div class="hero-chips" aria-label="DFConnectの特徴">
             <span class="chip">窓口と実装者が同一人物</span>
             <span class="chip">貴社名義の進行に配慮</span>
             <span class="chip">NDA前の匿名相談OK</span>
@@ -209,7 +216,7 @@ if (!is_array($old)) {
                 aria-required="true"
                 aria-invalid="<?= isset($fieldErrors['privacy']) ? 'true' : 'false' ?>"
                 aria-describedby="<?= isset($fieldErrors['privacy']) ? 'err-privacy' : '' ?>">
-              <a href="#privacy">プライバシーポリシー</a>に同意のうえ送信します
+              <span><a href="privacy.html">プライバシーポリシー</a>に同意のうえ送信します</span>
               <?php if (!empty($fieldErrors['privacy'])): ?>
                 <p class="form-error" id="err-privacy"><?= h($fieldErrors['privacy']) ?></p>
               <?php endif; ?>
@@ -246,18 +253,43 @@ if (!is_array($old)) {
             <p>外注したいが、クライアント情報の共有範囲や進行ルールの擦り合わせが手間になる</p>
           </article>
         </div>
-        <p class="why-conclusion reveal">DF CONNECTは、制作会社様の現場で必要な範囲の制作実務を一部受ける外部パートナーです。</p>
+        <p class="why-conclusion reveal">DFConnectは、制作会社様の現場で必要な範囲の制作実務を一部受ける外部パートナーです。</p>
       </div>
     </section>
 
     <section id="about" class="section section--pale" aria-labelledby="about-title">
       <div class="container">
+        <div class="profile-card reveal">
+          <img src="assets/images/顔写真.jpg" alt="DFConnect 代表 佐藤 優羽" class="profile-photo" width="180" height="180" loading="lazy">
+          <div class="profile-body">
+            <p class="profile-greeting">代表 佐藤 優羽（さとう ゆう）</p>
+            <p class="profile-role">Web制作・フロントエンド実装 ／ 制作会社・広告代理店向け外部制作パートナー</p>
+            <p>
+              DFConnectは、Web制作会社様・広告代理店様の制作実務を外部から支援する個人事業です。
+              ご相談の窓口から要件整理、実装、品質確認、納品まで、代表である私が一貫して担当いたします。
+            </p>
+            <p>
+              担当者が固定されることで、進行中の認識齟齬や伝達ロスを抑え、貴社の制作フローに沿った安定した品質でご納品します。
+              貴社名義での進行・NDA締結・守秘前提のご相談にも対応しており、エンドクライアント様への配慮が必要な案件も安心してお任せいただけます。
+            </p>
+            <p>
+              対応範囲・納期・稼働状況については常に正直にお伝えし、無理な受注はいたしません。
+              短期スポット案件から継続的な制作協力まで、貴社の必要なタイミング・必要な範囲でご活用いただける体制を整えています。
+            </p>
+            <ul class="profile-points">
+              <li>原則 当日〜翌営業日中に一次返信</li>
+              <li>貴社名義での進行・NDA締結に対応</li>
+              <li>スポット案件・継続協力いずれも対応可</li>
+              <li>対応可否は事前に明確にご回答</li>
+            </ul>
+          </div>
+        </div>
         <div class="section-heading reveal">
-          <h2 id="about-title">個人事業の外部制作パートナーとして、代表者本人が窓口になります。</h2>
+          <h2 id="about-title">大人数の会社ではないからこそ、できることがあります。</h2>
           <p>
-            DF CONNECTは、Web制作会社様・広告代理店様の外部制作パートナーとして活動している個人事業です。大人数の制作会社ではありません。<br>
-            その分、相談内容の把握、対応可否判断、制作時の確認、納品前のチェックまで、連絡経路をシンプルに進められます。<br>
-            大量案件を同時に受ける体制ではないため、対応範囲・納期・連絡ルールを事前に整理したうえで、無理のない形で対応します。
+            DFConnectは個人で動いている小さなパートナーです。<br>
+            そのぶん、相談内容の把握、対応可否の判断、制作中の確認、納品前のチェックまで、間に人をはさまずシンプルに進められます。<br>
+            大量案件を同時に抱える体制ではないので、対応範囲と納期はいつも正直にお伝えします。
           </p>
         </div>
         <div class="about-grid">
@@ -310,6 +342,10 @@ if (!is_array($old)) {
           <article class="what-card reveal">
             <h3>公開前チェック・フォーム確認</h3>
             <p>表示崩れ、リンク切れ、フォーム送信、OGP / meta確認など、納品前・公開前の確認作業を支援します。</p>
+          </article>
+          <article class="what-card reveal">
+            <h3>ライティング・文章作成補助</h3>
+            <p>個人サイトや自社商品の販売ページで培った範囲で、見出し案、サービス説明文、CTAまわりの文章整理を補助します。専門性の高い取材記事や大規模なコンテンツ制作は、内容を確認したうえで対応可否を判断します。</p>
           </article>
         </div>
       </div>
@@ -389,6 +425,9 @@ if (!is_array($old)) {
         </div>
         <div class="demo-grid">
           <article class="demo-card reveal">
+            <a class="demo-thumb" href="/haru/" target="_blank" rel="noopener" aria-label="HARU COFFEEのデモサイトを開く">
+              <img src="assets/images/demos/haru.png" alt="HARU COFFEE デモサイトのスクリーンショット" loading="lazy">
+            </a>
             <h3>HARU COFFEE</h3>
             <p class="work-labels">想定業種：飲食店・カフェ</p>
             <p class="demo-tech">WordPress自作テーマ / セマンティックHTML / CSSカスタムプロパティ / レスポンシブ</p>
@@ -396,6 +435,9 @@ if (!is_array($old)) {
             <a class="button button-small button-ghost" href="/haru/" target="_blank" rel="noopener">HARU COFFEEを見る</a>
           </article>
           <article class="demo-card reveal">
+            <a class="demo-thumb" href="/livesta/" target="_blank" rel="noopener" aria-label="LIVESTAのデモサイトを開く">
+              <img src="assets/images/demos/livesta.png" alt="LIVESTA デモサイトのスクリーンショット" loading="lazy">
+            </a>
             <h3>LIVESTA</h3>
             <p class="work-labels">想定業種：不動産会社・地域密着型サービス</p>
             <p class="demo-tech">WordPress自作テーマ / カスタム投稿タイプ / CSS Grid / レスポンシブ</p>
@@ -403,6 +445,9 @@ if (!is_array($old)) {
             <a class="button button-small button-ghost" href="/livesta/" target="_blank" rel="noopener">LIVESTAを見る</a>
           </article>
           <article class="demo-card reveal">
+            <a class="demo-thumb" href="/tpi/" target="_blank" rel="noopener" aria-label="東京精密工業のデモサイトを開く">
+              <img src="assets/images/demos/tpi.png" alt="東京精密工業 デモサイトのスクリーンショット" loading="lazy">
+            </a>
             <h3>東京精密工業</h3>
             <p class="work-labels">想定業種：製造業・BtoB企業サイト</p>
             <p class="demo-tech">WordPress自作テーマ / セマンティックHTML / Vanilla JS / レスポンシブ</p>
@@ -557,37 +602,13 @@ if (!is_array($old)) {
       </div>
     </section>
 
-    <section id="privacy" class="section section--white privacy-section" aria-labelledby="privacy-title">
-      <div class="container">
-        <div class="section-heading">
-          <h2 id="privacy-title">プライバシーポリシー</h2>
-          <p>DF CONNECT（以下「当社」）は、お問い合わせフォームで取得した情報を、問い合わせ対応、見積作成、業務上の連絡、ならびに不正送信対策の目的で利用します。</p>
-        </div>
-        <div class="privacy-content">
-          <h3>取得する情報</h3>
-          <ul>
-            <li>会社名、氏名、メールアドレス</li>
-            <li>相談内容（任意項目含む）</li>
-            <li>IPアドレス・User-Agent・送信元情報</li>
-          </ul>
-          <h3>利用目的</h3>
-          <ul>
-            <li>お問い合わせ対応</li>
-            <li>見積作成・ご提案準備</li>
-            <li>業務上の連絡</li>
-            <li>不正送信・なりすまし対策</li>
-          </ul>
-          <p>法令に基づく場合を除き、同意なく第三者に提供しません。問い合わせ情報の開示・訂正・削除の依頼は、フォーム送信窓口までご連絡ください。</p>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-brand">
         <div>
-          <p class="footer-title">DF CONNECT</p>
+          <p class="footer-title">DFConnect</p>
           <p class="footer-subtitle">個人事業のWeb制作パートナー</p>
         </div>
         <p>Web制作会社・広告代理店向けに、コーディング、WordPress改修、軽微修正、公開前チェックを必要な範囲で対応しています。</p>
@@ -605,17 +626,9 @@ if (!is_array($old)) {
         <span class="footer-sep" aria-hidden="true">/</span>
         <a href="#contact">相談する</a>
         <span class="footer-sep" aria-hidden="true">/</span>
-        <a href="#privacy">プライバシーポリシー</a>
+        <a href="privacy.html">プライバシーポリシー</a>
       </div>
-      <p class="footer-business">
-        屋号：DF CONNECT<br>
-        事業形態：個人事業<br>
-        代表者：佐藤 優羽<br>
-        所在地：東京都江東区平野1-1-10 小宮ビル<br>
-        連絡先：お問い合わせフォームよりご連絡ください<br>
-        対応領域：Web制作・改修・運用保守
-      </p>
-      <p class="copyright">© DF CONNECT</p>
+      <p class="copyright">© DFConnect</p>
     </div>
   </footer>
 

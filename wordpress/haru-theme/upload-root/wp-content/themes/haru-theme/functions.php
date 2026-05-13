@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('HARU_THEME_VERSION', '1.1.1');
+define('HARU_THEME_VERSION', '1.1.4');
 
 function haru_setup_theme(): void
 {
@@ -542,6 +542,23 @@ function haru_get_latest_news(int $count = 3): array
     ]);
 }
 
+function haru_get_news_list_query(int $posts_per_page = 10): WP_Query
+{
+    $paged = (int) get_query_var('paged');
+
+    if ($paged < 1) {
+        $paged = (int) get_query_var('page');
+    }
+
+    return new WP_Query([
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'posts_per_page' => $posts_per_page,
+        'paged' => max(1, $paged),
+        'ignore_sticky_posts' => true,
+    ]);
+}
+
 function haru_get_news_badge_color(string $slug): string
 {
     $map = [
@@ -636,6 +653,46 @@ function haru_render_placeholder(string $key, string $shape = ''): void
     haru_render_media($key, $shape);
 }
 
+function haru_render_news_filters(): void
+{
+    ?>
+    <div class="section-inner centered">
+        <div class="filter-row">
+            <a href="<?php echo esc_url(haru_get_news_url()); ?>" class="filter-pill <?php echo !is_category() ? 'active' : ''; ?>">すべて</a>
+            <?php foreach (haru_get_news_categories() as $category) : ?>
+                <a href="<?php echo esc_url(get_category_link($category)); ?>" class="filter-pill <?php echo is_category($category->term_id) ? 'active' : ''; ?>"><?php echo esc_html($category->name); ?></a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <?php
+}
+
+function haru_render_news_listing(?WP_Query $query = null): void
+{
+    $is_custom_query = $query instanceof WP_Query;
+    $has_posts = $is_custom_query ? $query->have_posts() : have_posts();
+    ?>
+    <div class="section-inner news-list">
+        <?php if ($has_posts) : ?>
+            <?php if ($is_custom_query) : ?>
+                <?php while ($query->have_posts()) : $query->the_post(); ?>
+                    <?php haru_render_news_row(get_post()); ?>
+                <?php endwhile; ?>
+                <?php haru_render_posts_pagination((int) $query->max_num_pages); ?>
+                <?php wp_reset_postdata(); ?>
+            <?php else : ?>
+                <?php while (have_posts()) : the_post(); ?>
+                    <?php haru_render_news_row(get_post()); ?>
+                <?php endwhile; ?>
+                <?php haru_render_posts_pagination(); ?>
+            <?php endif; ?>
+        <?php else : ?>
+            <article class="info-card">公開中のお知らせはありません。</article>
+        <?php endif; ?>
+    </div>
+    <?php
+}
+
 function haru_render_news_row(WP_Post $post, bool $reveal = true): void
 {
     $term = haru_get_primary_news_category($post);
@@ -725,13 +782,19 @@ function haru_render_contact_form(): void
     <?php
 }
 
-function haru_render_posts_pagination(): void
+function haru_render_posts_pagination(?int $total = null): void
 {
-    $links = paginate_links([
+    $args = [
         'type' => 'array',
         'prev_text' => '←',
         'next_text' => '→',
-    ]);
+    ];
+
+    if ($total !== null) {
+        $args['total'] = $total;
+    }
+
+    $links = paginate_links($args);
 
     if (!$links) {
         return;

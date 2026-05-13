@@ -188,12 +188,7 @@ $phone_href = livesta_get_company_phone_href();
             <div class="news-list reveal">
                 <?php
                 $news_query = new WP_Query(
-                    [
-                        'post_type'      => 'post',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => 4,
-                        'category_name'  => 'news,property,media',
-                    ]
+                    livesta_get_news_query_args(4)
                 );
 
                 if ($news_query->have_posts()) :

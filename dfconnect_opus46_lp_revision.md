@@ -1,3 +1,5 @@
+
+
 # DF CONNECT LP修正指示書 for Opus 4.6
 
 ## 0. この修正の目的
