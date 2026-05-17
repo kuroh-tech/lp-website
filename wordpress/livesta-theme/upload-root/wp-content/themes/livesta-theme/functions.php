@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('LIVESTA_THEME_VERSION', '1.0.5');
+define('LIVESTA_THEME_VERSION', '1.0.6');
 
 function livesta_setup_theme(): void {
     add_theme_support('title-tag');

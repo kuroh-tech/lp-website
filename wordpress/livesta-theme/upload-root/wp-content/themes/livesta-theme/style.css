@@ -1438,7 +1438,7 @@ section {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, minmax(140px, 1fr));
+  grid-template-columns: repeat(4, minmax(140px, 1fr)) minmax(220px, 0.9fr);
   gap: 1rem;
   align-items: end;
 }
@@ -1494,17 +1494,30 @@ section {
 }
 
 .filter-submit {
-  height: 48px;
+  width: 100%;
+  min-width: 220px;
+  min-height: 56px;
   border: 0;
+  border-radius: 14px;
+  padding: 0 1.6rem;
   background: var(--accent);
   color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.96rem;
   font-weight: 700;
   letter-spacing: 0.07em;
+  line-height: 1.2;
   cursor: pointer;
+  box-shadow: 0 16px 34px rgba(154, 125, 84, 0.24);
+  transition: background 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
 }
 
 .filter-submit:hover {
   background: var(--accent-light);
+  box-shadow: 0 20px 40px rgba(154, 125, 84, 0.3);
+  transform: translateY(-1px);
 }
 
 .property-list-section {
@@ -2431,6 +2444,14 @@ section {
   .filter-form {
     grid-template-columns: repeat(3, minmax(120px, 1fr));
   }
+
+  .filter-form .filter-item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .filter-submit {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 860px) {
@@ -2620,6 +2641,10 @@ section {
   .post-nav,
   .property-thumbs {
     grid-template-columns: 1fr;
+  }
+
+  .filter-form .filter-item:last-child {
+    grid-column: auto;
   }
 
   .about-numbers,
